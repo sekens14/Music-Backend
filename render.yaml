@@ -3,10 +3,12 @@ services:
     name: music-backend
     runtime: python
     buildCommand: |
+      sudo apt-get update
+      sudo apt-get install -y ffmpeg
+      pip install --upgrade pip
       pip install -r requirements.txt
-      sudo apt-get update && sudo apt-get install -y ffmpeg
     startCommand: gunicorn server:app
     envVars:
       - key: FFMPEG_PATH
         value: /usr/bin/ffmpeg
-    plan: free  # Remove for paid plans
+    plan: free
